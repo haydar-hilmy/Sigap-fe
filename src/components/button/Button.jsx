@@ -11,7 +11,7 @@ export const Button = ({
 }) => {
     const baseClass = `
     ${variant}
-    w-full flex items-center justify-center hover:bg-purple-700 transition text-white font-semibold py-3 rounded-xl
+    w-full flex px-5 items-center justify-center transition text-white font-semibold py-2 rounded-xl
 `;
 
     const variants = {
@@ -26,7 +26,7 @@ export const Button = ({
         warning:
             "bg-yellow-500 hover:bg-yellow-700 active:bg-yellow-800 text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500",
         ghost:
-            "bg-gray-100 hover:bg-gray-200 active:bg-gray-300 text-gray-600 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300",
+            "bg-gray-100 hover:bg-gray-200 active:bg-gray-300 text-gray-600 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 text-gray-800",
     };
 
     const classes = `${baseClass} ${variants[variant] || variants.primary} ${isDisabled ? "disabled:opacity-70 cursor-not-allowed" : ""

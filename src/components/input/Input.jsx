@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { useRef } from "react";
 
 // All input components are compatible with react-hook-form and Controller
 
@@ -28,11 +29,12 @@ export const TextInput = ({
     errorMsg = "",
     disabled = false,
     readOnly = false,
+    required = false,
 }) => {
     return (
         <div className="flex flex-col">
             {label && (
-                <label className="block text-base font-medium mb-1" htmlFor={name}>
+                <label className={`block text-base font-medium mb-1 ${required ? "required-input" : ""}`} htmlFor={name}>
                     {label}
                 </label>
             )}
@@ -58,6 +60,51 @@ export const TextInput = ({
     );
 };
 
+export const TextAreaInput = ({
+    name,
+    value,
+    onChange,
+    onBlur,
+    placeholder = "",
+    label = "",
+    errorMsg = "",
+    disabled = false,
+    readOnly = false,
+    required = false,
+    rows = 4, // default tinggi textarea
+}) => {
+    return (
+        <div className="flex flex-col">
+            {label && (
+                <label
+                    className={`block text-base font-medium mb-1 ${required ? "required-input" : ""}`}
+                    htmlFor={name}
+                >
+                    {label}
+                </label>
+            )}
+            <FieldInput isError={!!errorMsg}>
+                <textarea
+                    id={name}
+                    name={name}
+                    value={value ?? ""}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    disabled={disabled}
+                    readOnly={readOnly}
+                    placeholder={placeholder}
+                    rows={rows}
+                    className={`w-full px-4 py-3 text-sm rounded-xl outline-none resize-none ${readOnly || disabled ? "bg-gray-200" : "bg-white"
+                        }`}
+                />
+            </FieldInput>
+            {errorMsg && (
+                <small className="text-red-500 text-sm mt-1">{errorMsg}</small>
+            )}
+        </div>
+    );
+};
+
 
 export const PasswordInput = ({
     name,
@@ -68,6 +115,7 @@ export const PasswordInput = ({
     label = "",
     errorMsg = "",
     disabled = false,
+    required = false,
 }) => {
     const [showPassword, setShowPassword] = useState(false);
 
@@ -78,7 +126,7 @@ export const PasswordInput = ({
     return (
         <div className="flex flex-col">
             {label && (
-                <label className="block text-base font-medium mb-1" htmlFor={name}>
+                <label className={`block text-base font-medium mb-1 ${required ? "required-input" : ""}`} htmlFor={name}>
                     {label}
                 </label>
             )}
@@ -121,11 +169,12 @@ export const NumberInput = ({
     label = "",
     errorMsg = "",
     disabled = false,
+    required = false,
 }) => {
     return (
         <div className="flex flex-col">
             {label && (
-                <label className="block text-base font-medium mb-1" htmlFor={name}>
+                <label className={`block text-base font-medium mb-1 ${required ? "required-input" : ""}`} htmlFor={name}>
                     {label}
                 </label>
             )}
@@ -163,11 +212,12 @@ export const SelectInput = ({
     errorMsg = "",
     options = [],
     disabled = false,
+    required = false,
 }) => {
     return (
         <div className="flex flex-col">
             {label && (
-                <label className="block text-base font-medium mb-1" htmlFor={name}>
+                <label className={`block text-base font-medium mb-1 ${required ? "required-input" : ""}`} htmlFor={name}>
                     {label}
                 </label>
             )}
@@ -189,6 +239,67 @@ export const SelectInput = ({
                         </option>
                     ))}
                 </select>
+            </FieldInput>
+            {errorMsg && (
+                <small className="text-red-500 text-sm mt-1">{errorMsg}</small>
+            )}
+        </div>
+    );
+};
+
+
+export const FileInput = ({
+    name,
+    value,
+    onChange,
+    onBlur,
+    label = "",
+    errorMsg = "",
+    placeholder = "Pilih file...",
+    accept = "",
+    disabled = false,
+    required = false,
+    multiple = false,
+}) => {
+    const fileInputRef = useRef(null);
+
+    const fileName = value && value.length > 0
+        ? Array.from(value).map((file) => file.name).join(", ")
+        : "";
+
+    return (
+        <div className="flex flex-col">
+            {label && (
+                <label
+                    htmlFor={name}
+                    className={`block text-base font-medium mb-1 ${required ? "required-input" : ""}`}
+                >
+                    {label}
+                </label>
+            )}
+            <FieldInput isError={!!errorMsg}>
+                <div
+                    className={`w-full flex items-center justify-between px-4 py-3 text-sm rounded-xl cursor-pointer ${disabled ? "bg-gray-200" : "bg-white"
+                        }`}
+                    onClick={() => !disabled && fileInputRef.current.click()}
+                >
+                    <span className={`${fileName ? "text-gray-800" : "text-gray-400"}`}>
+                        {fileName || placeholder}
+                    </span>
+                    <span className="text-blue-500 font-medium">Browse</span>
+                </div>
+                <input
+                    type="file"
+                    id={name}
+                    name={name}
+                    ref={fileInputRef}
+                    accept={accept}
+                    multiple={multiple}
+                    disabled={disabled}
+                    onChange={(e) => onChange(e.target.files)}
+                    onBlur={onBlur}
+                    className="hidden"
+                />
             </FieldInput>
             {errorMsg && (
                 <small className="text-red-500 text-sm mt-1">{errorMsg}</small>

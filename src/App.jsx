@@ -4,6 +4,8 @@ import { RouterProvider } from "react-router-dom";
 import "./styles/styles.css";
 import LoginPage from "./pages/LoginPage";
 import DashboardMahasiswa from "./pages/mahasiswa/DashboardMahasiswa";
+import PengaduanMahasiswa from "./pages/mahasiswa/PengaduanMahasiswa";
+import AppLayout from "./layouts/AppLayout";
 
 const NotFoundPage = () => (
   <div className="flex flex-col items-center justify-center h-screen">
@@ -17,21 +19,17 @@ function App() {
   const myRouter = createBrowserRouter([
     {
       path: "/",
-      children: [
-        { index: true, element: <LoginPage /> },
-        { path: "login", element: <LoginPage /> },
-        { path: "*", element: <NotFoundPage /> },
-      ],
+      element: <LoginPage />,
     },
     {
       path: "/mhs",
+      element: <AppLayout />,
       children: [
         { index: true, element: <DashboardMahasiswa /> },
-        { path: "dashboard", element: <DashboardMahasiswa /> },
-        { path: "pengaduan", element: <DashboardMahasiswa /> },
+        { path: "dashboard", element: <DashboardMahasiswa />, handle: { title: "Dashboard" } },
+        { path: "pengaduan", element: <PengaduanMahasiswa />, handle: { title: "Pengaduan" } },
         { path: "riwayat", element: <DashboardMahasiswa /> },
         { path: "pengaturan", element: <DashboardMahasiswa /> },
-        { path: "*", element: <NotFoundPage /> },
       ],
     },
     {
@@ -46,5 +44,4 @@ function App() {
     </HelmetProvider>
   );
 }
-
 export default App;

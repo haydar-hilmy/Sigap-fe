@@ -15,7 +15,7 @@ const LoginPage = () => {
     try {
       setIsBtnLoading(true);
       console.log("Form Data:", data);
-      navigate("/dashboard");
+      navigate("/mhs/dashboard");
     } catch (error) {
       console.error("Login Error: ", error);
     } finally {
@@ -35,7 +35,7 @@ const LoginPage = () => {
 
           <form className="flex flex-col gap-6" onSubmit={formLogin.handleSubmit(handleSubmitLogin)}>
             <Controller
-              name="username"
+              name="nim"
               control={formLogin.control}
               rules={{ required: "NIM / NPP wajib diisi" }}
               render={({ field, fieldState: { error } }) => (
@@ -44,6 +44,7 @@ const LoginPage = () => {
                   label="NIM / NPP"
                   placeholder="Masukkan NIM / NPP"
                   errorMsg={error?.message}
+                  required
                   />
                 )}
             />
@@ -58,6 +59,7 @@ const LoginPage = () => {
                   label="Kata Sandi"
                   placeholder="Masukkan Password"
                   errorMsg={error?.message}
+                  required
                 />
               )}
             />
@@ -76,6 +78,7 @@ const LoginPage = () => {
                     { value: "admin", label: "Admin" },
                   ]}
                   errorMsg={error?.message}
+                  required
                 />
               )}
             />

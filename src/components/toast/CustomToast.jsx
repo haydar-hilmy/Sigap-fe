@@ -6,13 +6,6 @@ export const CustomToast = ({
     type = "info",
     duration,
 }) => {
-    // const defaultIcons = {
-    //     success: <CheckCircleOutlined style={{ color: "#22c55e" }} />,
-    //     info: <InfoOutlined style={{ color: "#3b82f6" }} />,
-    //     danger: <ErrorOutlined style={{ color: "#ef4444" }} />,
-    //     warning: <WarningOutlined style={{ color: "#f59e0b" }} />,
-    // };
-
     const bgColor = {
         success: "#ecfdf5",
         info: "#eff6ff",
