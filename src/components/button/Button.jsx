@@ -11,7 +11,7 @@ export const Button = ({
 }) => {
     const baseClass = `
     ${variant}
-    w-full flex px-5 items-center justify-center transition text-white font-semibold py-2 rounded-xl
+    w-full flex px-5 items-center justify-center transition text-white font-semibold py-2 rounded-lg
 `;
 
     const variants = {

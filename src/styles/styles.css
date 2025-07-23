@@ -1,5 +1,36 @@
+/* Scrollbar minimalis dan elegan */
+::-webkit-scrollbar {
+  height: 6px; /* untuk horizontal */
+  width: 6px;  /* untuk vertical */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* transparan agar clean */
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.5); /* warna abu tipis */
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 114, 128, 0.7); /* lebih gelap saat hover */
+}
+
+/* Untuk Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+
 .required-input::after {
     content: "*";
     color: inherit;
     margin-left: 0.25rem;
+}
+
+table {
+  min-width: max-content;
 }

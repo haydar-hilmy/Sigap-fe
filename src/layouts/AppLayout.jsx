@@ -17,7 +17,7 @@ const AppLayout = () => {
             </Helmet>
             <div className="flex flex-row">
                 <Navbar role="mhs" isShow={isShowNavbar} setIsShow={setIsShowNavbar} />
-                <main className="flex-1">
+                <main className="flex-1 overflow-x-auto">
                     <header className="shadow-md bg-[#eee]/70 backdrop-blur-md px-2 sm:px-4 md:px-6 py-3 flex items-center sticky top-0 z-[800]">
                         <div className="flex items-center gap-3 flex-1">
                             <div
@@ -37,7 +37,7 @@ const AppLayout = () => {
                             <img className="cursor-pointer" src="/images/hmti.webp" />
                         </div>
                     </header>
-                    <div className="px-2 sm:px-4 md:px-8 py-6 overflow-x-auto">
+                    <div className="px-3 sm:px-4 md:px-5 py-6 overflow-x-auto">
                         <Outlet />
                     </div>
                 </main>
