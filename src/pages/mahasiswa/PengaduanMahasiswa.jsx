@@ -5,44 +5,28 @@ import { Button } from "../../components/button/Button";
 import { useState } from "react";
 import FormBox from "../../components/form/FormBox";
 import { CustomToast } from "../../components/toast/CustomToast";
+import ErrorFormSubmit from "../../utils/ErrorFormSubmit";
 
 const PengaduanMahasiswa = () => {
     const formPengaduan = useForm();
-    const [isBtnLoading, setIsBtnLoading] = useState(false);
-
-    const onErrorFormSubmitPengaduan = (errors) => {
-        const errorKeys = Object.keys(errors);
-
-        if (errorKeys.length === 1) {
-            const firstError = errors[errorKeys[0]];
-            if (firstError?.message) {
-                CustomToast({ message: firstError.message, type: "danger" });
-            }
-        } else if (errorKeys.length > 1) {
-            CustomToast({
-                message: "Formulir belum lengkap, periksa kembali semua data yang wajib diisi.",
-                type: "danger"
-            });
-        }
-    };
-
+    const [btnLoading, setBtnLoading] = useState(false);
 
     const handleSubmitPengaduan = (data) => {
         try {
-            setIsBtnLoading(true);
+            setBtnLoading(true);
             console.log("Data Pengaduan:", data);
             CustomToast({ message: "Pengaduan berhasil dikirim!", type: "success" });
         } catch (error) {
             console.error("Error submitting pengaduan: ", error);
         } finally {
-            setIsBtnLoading(false);
+            setBtnLoading(false);
             formPengaduan.reset();
         }
     }
 
     return (
         <>
-            <FormBox onSubmit={formPengaduan.handleSubmit(handleSubmitPengaduan, onErrorFormSubmitPengaduan)}>
+            <FormBox onSubmit={formPengaduan.handleSubmit(handleSubmitPengaduan, ErrorFormSubmit)}>
                 <div className="flex flex-row gap-6 w-full">
                     <div className="flex-1">
                         <Controller

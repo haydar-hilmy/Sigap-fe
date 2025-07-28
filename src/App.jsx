@@ -7,6 +7,7 @@ import DashboardMahasiswa from "./pages/mahasiswa/DashboardMahasiswa";
 import PengaduanMahasiswa from "./pages/mahasiswa/PengaduanMahasiswa";
 import AppLayout from "./layouts/AppLayout";
 import RiwayatPengaduanMahasiswa from "./pages/mahasiswa/RiwayatPengaduanMahasiswa";
+import PengaturanPage from "./pages/PengaturanPage";
 
 const NotFoundPage = () => (
   <div className="flex flex-col items-center justify-center h-screen">
@@ -30,7 +31,7 @@ function App() {
         { path: "dashboard", element: <DashboardMahasiswa />, handle: { title: "Dashboard" } },
         { path: "pengaduan", element: <PengaduanMahasiswa />, handle: { title: "Pengaduan" } },
         { path: "riwayat", element: <RiwayatPengaduanMahasiswa />, handle: { title: "Riwayat Pengaduan" } },
-        { path: "pengaturan", element: <DashboardMahasiswa /> },
+        { path: "pengaturan", element: <PengaturanPage />, handle: { title: "Pengaturan" } },
       ],
     },
     {

@@ -4,11 +4,43 @@ import { MenuOutlined, NotificationsOutlined } from "@mui/icons-material";
 import { useState } from "react";
 
 import { Outlet, useMatches } from "react-router-dom";
+import PopupContainer from "../components/container/PopUpContainer";
+import NotificationCard from "../components/card/NotificationCard";
 
 const AppLayout = () => {
     const [isShowNavbar, setIsShowNavbar] = useState(false);
     const matches = useMatches();
     const title = matches.find((m) => m.handle?.title)?.handle.title || "App";
+    const [openNotification, setOpenNotification] = useState(false);
+
+    const notifications = [
+        {
+            title: "Surat Anda telah disetujui oleh Kaprodi.",
+            time: "2025-07-28T12:00:00",
+            type: "success"
+        },
+        {
+            title: "Revisi surat telah diterima.",
+            time: "2025-07-28T10:30:00",
+            type: "revision"
+        },
+        {
+            title: "Laporan Anda sedang diproses.",
+            time: "2025-07-28T10:55:00",
+            type: "processing"
+        },
+        {
+            title: "Laporan tidak valid.",
+            time: "invalid-date",
+            type: "default"
+        },
+        {
+            title: "Laporan Akhir Tahun",
+            time: "2025-12-31T12:00:00",
+            type: "default"
+        }
+    ];
+
 
     return (
         <>
@@ -30,7 +62,8 @@ const AppLayout = () => {
                         </div>
                         <div className="flex flex-row items-center gap-2">
                             <div
-                                className="cursor-pointer p-2 rounded-full hover:bg-gray-200 "
+                                className="cursor-pointer p-2 rounded-full hover:bg-gray-200"
+                                onClick={() => setOpenNotification(true)}
                             >
                                 <NotificationsOutlined color="inherit" />
                             </div>
@@ -42,6 +75,24 @@ const AppLayout = () => {
                     </div>
                 </main>
             </div>
+            {openNotification && (
+                <PopupContainer
+                    closeOnOutsideClick={true}
+                    showCloseButton={true}
+                    onClose={() => setOpenNotification(false)}
+                >
+                    <div className="flex flex-col w-full gap-1 pt-5">
+                        {notifications.map((notif, index) => (
+                            <NotificationCard
+                                key={index}
+                                title={notif.title}
+                                time={notif.time}
+                                type={notif.type}
+                            />
+                        ))}
+                    </div>
+                </PopupContainer>
+            )}
         </>
     );
 };
