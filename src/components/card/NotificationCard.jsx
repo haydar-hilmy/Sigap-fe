@@ -1,6 +1,6 @@
 import { CheckCircleOutlined, EditOutlined, HourglassEmptyOutlined, NotificationsNoneOutlined } from '@mui/icons-material';
 import React from 'react';
-import { FormatDate } from '../../utils/DateFormat';
+import { FormatDate } from '../../utils/formatDate';
 
 const typeConfig = {
     success: {

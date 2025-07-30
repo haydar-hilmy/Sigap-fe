@@ -21,7 +21,16 @@ function App() {
   const myRouter = createBrowserRouter([
     {
       path: "/",
-      element: <LoginPage />,
+      children: [
+        {
+          index: true,
+          element: <LoginPage />
+        },
+        {
+          path: "login",
+          element: <LoginPage />,
+        }
+      ]
     },
     {
       path: "/mhs",
@@ -33,6 +42,9 @@ function App() {
         { path: "riwayat", element: <RiwayatPengaduanMahasiswa />, handle: { title: "Riwayat Pengaduan" } },
         { path: "pengaturan", element: <PengaturanPage />, handle: { title: "Pengaturan" } },
       ],
+    },
+    {
+      path: "/prodi",
     },
     {
       path: "*",

@@ -5,7 +5,7 @@ import { Button } from "../../components/button/Button";
 import { useState } from "react";
 import FormBox from "../../components/form/FormBox";
 import { CustomToast } from "../../components/toast/CustomToast";
-import ErrorFormSubmit from "../../utils/ErrorFormSubmit";
+import ErrorFormSubmit from "../../utils/errorFormSubmit";
 
 const PengaduanMahasiswa = () => {
     const formPengaduan = useForm();
